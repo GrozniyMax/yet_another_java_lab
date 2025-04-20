@@ -15,7 +15,7 @@ import java.util.Objects;
 public class Main {
 
     private static final String GREET_MESSAGE = "Привет!";
-    private static final String INVALID_CLI_ARGS = "";//todo заполнить
+    private static final String INVALID_CLI_ARGS = "Invalid CLI arguments!";//todo заполнить
     private static final String FILE_NOT_FOUND = "File not found!";
 
     public static void main(String[] args) {

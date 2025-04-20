@@ -19,6 +19,6 @@ public class RemoveById implements Command {
 
     @Override
     public void execute() {
-        collectionManager.remove(index);
+        collectionManager.removeAllBy(f -> f.getId() == index);
     }
 }

@@ -2,6 +2,7 @@ package ifmo.se.command;
 
 import ifmo.se.CollectionManager;
 import ifmo.se.cli.CommandLineReader;
+import ifmo.se.cli.exc.EofException;
 import ifmo.se.command.impls.add.AddFactory;
 import ifmo.se.command.impls.addIfMin.AddIfMinFactory;
 import ifmo.se.command.impls.clear.ClearFactory;
@@ -22,6 +23,7 @@ import ifmo.se.command.impls.updateById.UpdateByIdFactory;
 import ifmo.se.exc.CommandCreationException;
 import ifmo.se.exc.CommandExecutionException;
 
+import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -74,7 +76,7 @@ public class AbstractCommandFactory {
         factories.put("help", new HelpFactory(out));
         factories.put("info", new InfoFactory(collectionManager, out));
         factories.put("show", new ShowFactory(collectionManager, out));
-        factories.put("add", new AddFactory(collectionManager));
+        factories.put("add", new AddFactory(collectionManager, out));
         factories.put("update", new UpdateByIdFactory(collectionManager));
         factories.put("remove_by_id", new RemoveByIdFactory(collectionManager));
         factories.put("clear", new ClearFactory(collectionManager));
@@ -115,8 +117,22 @@ public class AbstractCommandFactory {
      * @return команда
      */
     public Command createCommand() {
-        String line = input.readLine();
+        String line = readCommand();
         return createCommand(line);
+    }
+
+    public String readCommand() {
+        String line = input.readLine();
+        if (line == null) {
+            throw new EofException();
+        }
+        while (line.isBlank()) {
+            line = input.readLine();
+            if (line == null) {
+                throw new EofException();
+            }
+        }
+        return line;
     }
 
 

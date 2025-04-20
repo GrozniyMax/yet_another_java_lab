@@ -31,16 +31,11 @@ public class BaseCliReader {
             if (line == null) {
                 throw new EofException();
             }
-            while (line.isBlank()) {
-                line = in.readLine();
-                if (line == null) {
-                    throw new EofException();
-                }
-            }
             return line;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
 
