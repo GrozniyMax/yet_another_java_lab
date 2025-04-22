@@ -14,9 +14,25 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.5")
 }
 
-tasks.jar {
-    manifest {
-        attributes["Main-Class"] = "ifmo.se.Main"
+tasks {
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+    compileTestJava {
+        options.encoding = "UTF-8"
+    }
+    javadoc {
+        options.encoding = "UTF-8"
+    }
+
+    withType<JavaCompile> {
+        options.encoding = "UTF-8"
+    }
+
+    withType<Jar> {
+        manifest {
+            attributes["Main-Class"] = "ifmo.se.Main"
+        }
     }
 }
 
