@@ -24,6 +24,9 @@ public class Flat implements Comparable<Flat> {
 
 
         public Builder name(String name) {
+            if (name.isBlank()) {
+                throw new IllegalArgumentException("Name must not be empty");
+            }
             this.name = name;
             return this;
         }
@@ -157,6 +160,18 @@ public class Flat implements Comparable<Flat> {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void mergeWith(Flat flat) {
+        this.name = flat.name;
+        this.coordinates = flat.coordinates;
+        this.creationDate = flat.creationDate;
+        this.area = flat.area;
+        this.numberOfRooms = flat.numberOfRooms;
+        this.furnish = flat.furnish;
+        this.view = flat.view;
+        this.transport = flat.transport;
+        this.house = flat.house;
     }
 
     @Override

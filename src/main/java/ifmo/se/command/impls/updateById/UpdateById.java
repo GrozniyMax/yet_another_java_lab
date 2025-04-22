@@ -25,6 +25,11 @@ public class UpdateById implements Command {
     @Override
     public void execute() {
         Flat next = reader.readFlat();
-        collectionManager.getCollections().set(index, next);
+        collectionManager.getCollections().forEach(flat -> {
+            if (flat.getId() == index) {
+                flat.mergeWith(next);
+            }
+        });
     }
+
 }
