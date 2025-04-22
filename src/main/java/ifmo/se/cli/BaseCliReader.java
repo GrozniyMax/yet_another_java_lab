@@ -31,7 +31,7 @@ public class BaseCliReader {
             if (line == null) {
                 throw new EofException();
             }
-            return line;
+            return line.strip().trim();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -133,6 +133,9 @@ public class BaseCliReader {
         out.print(inputMsg);
 
         String input = readLine();
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("Название дома не может быть пустым");
+        }
         return input;
     }
 
