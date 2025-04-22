@@ -165,7 +165,6 @@ public class Flat implements Comparable<Flat> {
     public void mergeWith(Flat flat) {
         this.name = flat.name;
         this.coordinates = flat.coordinates;
-        this.creationDate = flat.creationDate;
         this.area = flat.area;
         this.numberOfRooms = flat.numberOfRooms;
         this.furnish = flat.furnish;
