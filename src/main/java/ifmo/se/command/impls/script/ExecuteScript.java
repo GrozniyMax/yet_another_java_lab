@@ -1,6 +1,5 @@
 package ifmo.se.command.impls.script;
 
-import ifmo.se.applicationManager.ApplicationManager;
 import ifmo.se.applicationManager.ScriptApplicationManager;
 import ifmo.se.cli.FileReader;
 import ifmo.se.cli.exc.InvalidInputException;
@@ -49,7 +48,6 @@ public class ExecuteScript implements Command {
             var reader = new FileReader(new FileInputStream(file.toFile()));
             usedFiles.add(file.toAbsolutePath());
             new ScriptApplicationManager(new AbstractCommandFactory(commandFactory, reader), commandExecutor, out).run();
-            out.println("Скрипт выполнен успешно");
         } catch (FileNotFoundException e) {
             throw new CommandExecutionException(e);
         } catch (CommandExecutionException e) {

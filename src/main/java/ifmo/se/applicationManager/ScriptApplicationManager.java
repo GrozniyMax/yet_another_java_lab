@@ -19,16 +19,23 @@ public class ScriptApplicationManager extends ApplicationManager {
     }
 
     public void run() {
+        boolean succecced = true;
         while (true) {
             try {
                 Command command = commandFactory.createCommand();
                 commandExecutor.execute(command);
             } catch (ExitCommandException | EofException e) {
                 break;
-            } catch (CommandExecutionException | CommandCreationException e) {
+            } catch (Exception e) {
                 out.println(e.getMessage());
+                succecced = false;
             }
         }
-
+        if (succecced) {
+            out.println("Скрипт выполнен успешно");
+        } else {
+            out.println("Скрипт выполнен с ошибками");
+        }
     }
+
 }

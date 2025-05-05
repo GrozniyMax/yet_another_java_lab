@@ -104,7 +104,12 @@ public class AbstractCommandFactory {
             String command = parts[0];
             String lineArg = parts.length < 2 ? null : parts[1];
             CommandFactory factory = factories.get(command);
+            if (factory == null) {
+                throw new CommandCreationException("Unknown command: " + command);
+            }
             return factory.create(input, lineArg);
+        } catch (CommandCreationException e) {
+            throw e;
         } catch (RuntimeException e) {
             throw new CommandCreationException(e);
         }
